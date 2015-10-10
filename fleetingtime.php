@@ -25,7 +25,7 @@ License: GPL2
     }
 
     function fleeting_admin_menu(){
-        add_options_page(__('fleeting time'),__('fleeting time'),'administrator','fleetingtime','display_admin_page');
+        add_options_page(__('fleeting time','fleetingtime'),__('fleeting time','fleetingtime'),'administrator','fleetingtime','display_admin_page');
     }
 
 ?>
