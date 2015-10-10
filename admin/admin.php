@@ -10,7 +10,7 @@
     function display_admin_page(){
 
         ?>
-        <h3>welcome to fleeting time admin page</h3>
+        <h3><? _e('welcome message','welcome to fleeting time admin page'); ?></h3>
 <?php
 
     }
