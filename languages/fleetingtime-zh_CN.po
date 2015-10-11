@@ -49,3 +49,24 @@ msgstr "结束时间"
 
 msgid "Check Fleeting Flag"
 msgstr "查看流年标志"
+
+msgid "Choose Where the fleeting time flag to show"
+msgstr "请选择流年标志出现的位置"
+
+msgid "Above the post content"
+msgstr "文章内容之上"
+
+msgid "Below the post content"
+msgstr "文章内容之下"
+
+msgid "Popup Layer"
+msgstr "弹出层显示"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Add a Fleeting Period."
+msgstr "添加一段流年"
+
+msgid "Fleeting Words"
+msgstr "用一段文字描述"
