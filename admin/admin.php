@@ -23,6 +23,7 @@ function display_admin_page()
 
         <script type="text/javascript">
             AJAXURL = "<?= admin_url( 'admin-ajax.php' )?>";
+            VIEWLABEL = "<?php _e('view the flag content','fleetingtime') ?>";
         </script>
     </head>
     <body>
@@ -88,7 +89,7 @@ function display_admin_page()
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="datacon">
                                 </tbody>
                             </table>
                         </div>
@@ -98,7 +99,7 @@ function display_admin_page()
                             </p>
                         </div>
                         <div class="modal fade" id="codedialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" style="width:550px;">
+                            <div class="modal-dialog" style="width:600px;">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -114,7 +115,7 @@ function display_admin_page()
                                                     <?php _e('Period Title','fleetingtime')?>
                                                 </label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="title" />
+                                                    <input type="text" class="form-control" id="title" name="title" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -123,7 +124,7 @@ function display_admin_page()
                                                     <?php _e('Period Start Time','fleetingtime')?>
                                                 </label>
                                                 <div class="col-sm-9">
-                                                    <input type="date" class="form-control" id="starttime" />
+                                                    <input type="date" class="form-control" id="starttime" name="starttime" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -132,7 +133,7 @@ function display_admin_page()
                                                     <?php _e('Period End Time','fleetingtime')?>
                                                 </label>
                                                 <div class="col-sm-9">
-                                                    <input type="date" class="form-control" id="endtime" />
+                                                    <input type="date" class="form-control" id="endtime" name="endtime" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -141,8 +142,8 @@ function display_admin_page()
                                                 </label>
                                                 <div class="col-sm-9">
                                                     <?php wp_editor( '', flag_content, $settings = array(
-                                                        quicktags=>0,
-                                                        tinymce=>1,
+                                                        quicktags=>1,
+                                                        tinymce=>0,
                                                         media_buttons=>0,
                                                         textarea_rows=>4,
                                                         editor_class=>"textareastyle"
