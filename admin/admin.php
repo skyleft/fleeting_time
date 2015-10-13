@@ -68,6 +68,9 @@ function display_admin_page()
                                 <button class="btn btn-warning" type="button" id="deletebtn">
                                     <em class="glyphicon glyphicon-remove"></em> <?php _e('Delete Period','fleetingtime');?>
                                 </button>
+                                <button class="btn btn-success" type="button" id="refreshbtn">
+                                    <em class="glyphicon glyphicon-refresh"></em> <?php _e('Refresh Period','fleetingtime');?>
+                                </button>
                             </div>
                             <table class="table table-bordered table-hover table-condensed" style="margin-top: 10px">
                                 <thead>

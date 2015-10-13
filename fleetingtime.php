@@ -75,6 +75,23 @@ License: GPL2
         wp_die();
     }
 
+
+
+    function getFleetingByTime($postTime){
+        if($postTime){
+            global $wpdb;
+            $table_name = $wpdb->prefix . "fleetingtime";
+            $ft = $wpdb->get_results(
+                "
+                SELECT ID, TITLE, STARTTIME, ENDTIME, FLAG_CONTENT
+                FROM $table_name WHERE '$postTime' BETWEEN STARTTIME AND ENDTIME
+                "
+            );
+            return json_encode($ft);
+        }
+        return null;
+    }
+
     function doRemove(){
         global $wpdb;
         $table_name = $wpdb->prefix . "fleetingtime";
@@ -116,4 +133,16 @@ License: GPL2
     if(is_admin()){
         add_action('admin_menu', 'fleeting_admin_menu');
     }
+
+    function fleeting_content($content){
+        if(is_single()){
+            $fleeting = getFleetingByTime($GLOBALS['post']->post_time);
+            return $content.$fleeting;
+        }else{
+            return $content;
+        }
+
+    }
+
+    add_filter('the_content', 'fleeting_content');
 ?>

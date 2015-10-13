@@ -41,7 +41,8 @@ function loadData(){
         function(data){
             if(data){
                 $("#datacon").empty();
-                for(var d in data){
+                for(var i=0;i<data.length;i++){
+                    var d = data[i];
                     var ntr = $("<tr>");
                     ntr.append($("<td><input type='checkbox' name='ids' id='ids"+ d.id+"' value='"+ d.ID +"'> </td>"));
                     ntr.append($("<td>"+ d.TITLE +"</td>"));
