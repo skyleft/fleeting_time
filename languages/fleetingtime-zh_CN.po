@@ -13,7 +13,7 @@ msgstr ""
 
 #. Name of the plugin
 msgid "Fleeting Time"
-msgstr "流年往事"
+msgstr "飞逝的时光"
 
 #. Description of the plugin
 msgid "Add some fleeting time flag to your post according to the post time"

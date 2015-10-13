@@ -31,7 +31,7 @@ License: GPL2
         $table_name = $wpdb->prefix . "fleetingtime";
         $ft = $wpdb->get_results(
             "
-                SELECT ID, TITLE, STARTTIME, ENDTIME, FLAG_CONTENT
+                SELECT ID, TITLE, POSITION,STARTTIME, ENDTIME, FLAG_CONTENT
                 FROM $table_name
                 "
         );
@@ -48,6 +48,10 @@ License: GPL2
             $data['starttime']=$_POST['starttime'];
         else
             $res['valid']=false;
+        if(isset($_POST['position']) && strlen(trim($_POST['position']))>0)
+            $data['position']=$_POST['position'];
+        else
+            $res['valid']=false;
         if(isset($_POST['endtime']) && strlen(trim($_POST['endtime']))>0)
             $data['endtime']=$_POST['endtime'];
         else
@@ -58,9 +62,9 @@ License: GPL2
             $res['valid']=false;
         if($res['valid']){
             if($_POST['id']){
-                $sql_res = $wpdb->update($table_name, $data, array('ID'=>$_POST['id']), array('%s','%s','%s','%s'), array('%d'));
+                $sql_res = $wpdb->update($table_name, $data, array('ID'=>$_POST['id']), array('%s','%s','%s','%s','%s'), array('%d'));
             }else{
-                $sql_res = $wpdb->insert($table_name,$data,array('%s','%s','%s','%s'));
+                $sql_res = $wpdb->insert($table_name,$data,array('%s','%s','%s','%s','%s'));
             }
             if($sql_res !== false){
                 echo json_encode(array('success'=>true));
@@ -83,11 +87,11 @@ License: GPL2
             $table_name = $wpdb->prefix . "fleetingtime";
             $ft = $wpdb->get_results(
                 "
-                SELECT ID, TITLE, STARTTIME, ENDTIME, FLAG_CONTENT
+                SELECT ID, TITLE, POSITION, STARTTIME, ENDTIME, FLAG_CONTENT
                 FROM $table_name WHERE '$postTime' BETWEEN STARTTIME AND ENDTIME
                 "
             );
-            return json_encode($ft);
+            return $ft;
         }
         return null;
     }
@@ -96,11 +100,25 @@ License: GPL2
         global $wpdb;
         $table_name = $wpdb->prefix . "fleetingtime";
         if(isset($_POST['id']) && strlen(trim($_POST['id']))>0){
-            $wpdb->delete($table_name, array('id'=>trim($_POST['id'])));
+            $ids = trim($_POST['id']);
+            if (substr($ids, -1)===',') {
+                $ids = substr($ids, 0, strlen($ids)-1);
+            }
+            $ids = explode(',', $ids);
+            $sql = "DELETE FROM $table_name WHERE ID IN (";
+            for ($i=0; $i < count($ids)-1; $i++) { 
+                $sql .= '%d,';
+            }
+            $sql .= '%d)';
+            $wpdb->query( $wpdb->prepare( 
+                $sql,
+                    $ids
+            ) );
             echo json_encode(array('success'=>true));
         }else{
             echo json_encode(array('success'=>false,'message'=>__('invalid parameter','fleetingtime')));
         }
+        wp_die();
     }
     require_once('admin/admin.php');
 
@@ -119,6 +137,7 @@ License: GPL2
         if($wpdb->get_var("show tables like '$table_name'") != $table_name){
             $create_table_sql = "CREATE TABLE ". $table_name . " (id bigint(20) NOT NULL AUTO_INCREMENT,"
                 ."title varchar(255) NOT NULL,"
+                ."position enum('up','bottom','popup') NOT NULL DEFAULT 'bottom',"
                 ."starttime timestamp NOT NULL,"
                 ."endtime timestamp NOT NULL,"
                 ."flag_content text NOT NULL,"
@@ -136,11 +155,24 @@ License: GPL2
 
     function fleeting_content($content){
         if(is_single()){
-            $fleeting = getFleetingByTime($GLOBALS['post']->post_time);
-            return $content.$fleeting;
-        }else{
-            return $content;
+            $fleeting = getFleetingByTime($GLOBALS['post']->post_date);
+            if (count($fleeting)>0) {
+                $fleeting = $fleeting[0];
+                $position = $fleeting->POSITION;
+                if ('up'===$position){
+                    $content = $fleeting->FLAG_CONTENT.$content;
+                }else if('popup'===$position){
+                    $content = $fleeting->FLAG_CONTENT.$content;
+                }else{
+                    $content .= $fleeting->FLAG_CONTENT;
+                }
+                return $content;
+            }
+            
         }
+
+        return $content;
+        
 
     }
 

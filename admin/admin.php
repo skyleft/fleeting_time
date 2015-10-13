@@ -47,19 +47,7 @@ function display_admin_page()
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="panel-140385">
-                            <div class="form-group" style="margin-top: 30px;">
-
-                                <label for="position" class="col-sm-4 control-label">
-                                    1.<?php _e('Choose Where the fleeting time flag to show','fleetingtime');?>
-                                </label>
-                                <div class="col-sm-8">
-                                    <select  class="form-control" id="position" >
-                                            <option value="up"><?php _e('Above the post content','fleetingtime');?></option>
-                                            <option value="down"><?php _e('Below the post content','fleetingtime');?></option>
-                                            <option value="popup"><?php _e('Popup Layer','fleetingtime');?></option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="btn-group" style="margin-top:20px;">
 
                                 <button class="btn btn-success" type="button" id="addbtn">
@@ -80,6 +68,9 @@ function display_admin_page()
                                     </th>
                                     <th>
                                         <?php _e('Period Title','fleetingtime');?>
+                                    </th>
+                                    <th>
+                                        <?php _e('Position','fleetingtime');?>
                                     </th>
                                     <th>
                                         <?php _e('Period Start Time','fleetingtime');?>
@@ -119,6 +110,19 @@ function display_admin_page()
                                                 </label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id="title" name="title" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label for="position" class="col-sm-3 control-label">
+                                                    <?php _e('Choose Where the fleeting time flag to show','fleetingtime')?>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <select  class="form-control" id="position" name="position" >
+                                                            <option value="up"><?php _e('Above the post content','fleetingtime');?></option>
+                                                            <option value="bottom"><?php _e('Below the post content','fleetingtime');?></option>
+                                                            <option value="popup"><?php _e('Popup Layer','fleetingtime');?></option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -170,12 +174,10 @@ function display_admin_page()
         </div>
     </div>
 
-    <div class="alert alert-success" role="alert" id="alertsuccess">...</div>
-    <div class="alert alert-warning" role="alert" id="alertparamerror">...</div>
-    <div class="alert alert-warning" role="alert" id="alertsyserror">...</div>
 
     <script src="<?= plugins_url('assets/js/jquery.min.js',dirname(__FILE__))?>"></script>
     <script src="<?= plugins_url('assets/js/bootstrap.min.js',dirname(__FILE__))?>"></script>
+    <script src="<?= plugins_url('assets/js/bootbox.min.js',dirname(__FILE__) );?>"></script>
     <script src="<?= plugins_url('assets/js/scripts.js',dirname(__FILE__))?>"></script>
     <?php
 
