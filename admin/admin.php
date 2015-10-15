@@ -121,7 +121,7 @@ function display_admin_page()
                                                     <select  class="form-control" id="position" name="position" >
                                                             <option value="up"><?php _e('Above the post content','fleetingtime');?></option>
                                                             <option value="bottom"><?php _e('Below the post content','fleetingtime');?></option>
-                                                            <option value="popup"><?php _e('Popup Layer','fleetingtime');?></option>
+                                                            <!-- <option value="popup"><?php _e('Popup Layer','fleetingtime');?></option> -->
                                                     </select>
                                                 </div>
                                             </div>

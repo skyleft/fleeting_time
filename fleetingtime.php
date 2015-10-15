@@ -160,11 +160,9 @@ License: GPL2
                 $fleeting = $fleeting[0];
                 $position = $fleeting->POSITION;
                 if ('up'===$position){
-                    $content = $fleeting->FLAG_CONTENT.$content;
-                }else if('popup'===$position){
-                    $content = $fleeting->FLAG_CONTENT.$content;
+                    $content = decorate_content($fleeting->FLAG_CONTENT).$content;
                 }else{
-                    $content .= $fleeting->FLAG_CONTENT;
+                    $content .= decorate_content($fleeting->FLAG_CONTENT);
                 }
                 return $content;
             }
@@ -176,5 +174,16 @@ License: GPL2
 
     }
 
+    function decorate_content($content){
+        return "<div class='fleeting-box-090807'>$content</div>";
+    }
+
     add_filter('the_content', 'fleeting_content');
+
+    add_action('wp_head','fleeting_style');
+
+    function fleeting_style(){
+        $fleeting_style = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".plugins_url('assets/css/fleeting.css',__FILE__)."\">";
+        echo $fleeting_style;
+    }
 ?>
