@@ -68,5 +68,29 @@ msgstr "保存"
 msgid "Add a Fleeting Period."
 msgstr "添加一段流年"
 
+msgid "Edit Period"
+msgstr "编辑"
+
 msgid "Fleeting Words"
 msgstr "用一段文字描述"
+
+msgid "Refresh"
+msgstr "刷新"
+
+msgid "Position"
+msgstr "显示位置"
+
+msgid "Preview the flag content"
+msgstr "预览显示效果"
+
+msgid "Top of the post"
+msgstr "文章顶部"
+
+msgid "Bottom of the post"
+msgstr "文章底部"
+
+msgid "Preview"
+msgstr "预览"
+
+msgid "Your Post"
+msgstr "你的文章"

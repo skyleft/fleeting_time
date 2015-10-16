@@ -71,14 +71,26 @@ function loadData(){
                     var ntr = $("<tr>");
                     ntr.append($("<td><input type='checkbox' name='ids' id='ids"+ d.ID+"' value='"+ d.ID +"'> </td>"));
                     ntr.append($("<td>"+ d.TITLE +"</td>"));
-                    ntr.append($("<td>"+ d.POSITION +"</td>"));
+                    ntr.append($("<td>"+ ('bottom'==d.POSITION?BOTTOMLABEL:UPLABEL) +"</td>"));
                     ntr.append($("<td>"+ d.STARTTIME + "</td>"));
                     ntr.append($("<td>"+ d.ENDTIME+"</td>"));
-                    ntr.append($("<td><a href=\"javascript:viewlabel('"+ d.ID+"')\">"+VIEWLABEL+"</a></td>"));
+                    ntr.append($("<td><a href=\"javascript:viewlabel('"+ d.FLAG_CONTENT+"','"+d.POSITION+"')\">"+VIEWLABEL+"</a></td>"));
                     $("#datacon").append(ntr);
                 }
             }
         },
         'json'
     );
+}
+
+function viewlabel (content,upOrBottom) {
+    $("#pre_post .fleeting-box-090807").remove();
+    var con = $('<div class="fleeting-box-090807" id="pre_fleeting_content"></div>');
+    con.html(content);
+    if ("bottom"===upOrBottom) {
+        $("#pre_post").append(con);
+    }else{
+        $("#pre_post").prepend(con);
+    }
+    $("#previewdialog").modal('show');
 }
