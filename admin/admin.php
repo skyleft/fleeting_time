@@ -27,6 +27,10 @@ function display_admin_page()
             VIEWLABEL = "<?php _e('Preview the flag content','fleetingtime') ?>";
             BOTTOMLABEL = "<?php _e('Bottom of the post','fleetingtime') ?>";
             UPLABEL = "<?php _e('Top of the post','fleetingtime') ?>";
+
+            ALERT_OK = "<?php _e('ok','fleetingtime');?>";
+            ALERT_PLEASE_CHOOSE_ONE_ROW = "<?php _e('please choose one row','fleetingtime');?>";
+            ALERT_FAILED = "<?php _e('failed','fleetingtime');?>";
         </script>
     </head>
     <body>
@@ -56,7 +60,7 @@ function display_admin_page()
                                 <button class="btn btn-success" type="button" id="addbtn">
                                     <em class="glyphicon glyphicon-plus"></em> <?php _e('Add Period','fleetingtime'); ?>
                                 </button>
-                                <button class="btn btn-primary" type="button" id="addbtn">
+                                <button class="btn btn-primary" type="button" id="editbtn">
                                     <em class="glyphicon glyphicon-edit"></em> <?php _e('Edit Period','fleetingtime'); ?>
                                 </button>
                                 <button class="btn btn-warning" type="button" id="deletebtn">
@@ -115,6 +119,7 @@ function display_admin_page()
                                                     <?php _e('Period Title','fleetingtime')?>
                                                 </label>
                                                 <div class="col-sm-9">
+                                                	<input type="hidden" id="id" name="id">
                                                     <input type="text" class="form-control" id="title" name="title" />
                                                 </div>
                                             </div>
@@ -125,8 +130,8 @@ function display_admin_page()
                                                 </label>
                                                 <div class="col-sm-9">
                                                     <select  class="form-control" id="position" name="position" >
-                                                            <option value="up"><?php _e('Above the post content','fleetingtime');?></option>
-                                                            <option value="bottom"><?php _e('Below the post content','fleetingtime');?></option>
+                                                            <option value="up" id="upposition"><?php _e('Above the post content','fleetingtime');?></option>
+                                                            <option value="bottom" id="bottomposition"><?php _e('Below the post content','fleetingtime');?></option>
                                                             <!-- <option value="popup"><?php _e('Popup Layer','fleetingtime');?></option> -->
                                                     </select>
                                                 </div>
@@ -185,7 +190,7 @@ function display_admin_page()
                                             <?php _e('Preview','fleetingtime')?>
                                         </h4>
                                     </div>
-                                    <div class="modal-body" style="padding-bottom:5px;" id="pre_post">
+                                    <div class="modal-body" style="padding-bottom:5px;margin:10px;border:1px solid #dedee3;" id="pre_post">
                                         <div style="width:100%;height:90px;text-align:center;" >
                                         	<h1><?php _e('Your Post','fleetingtime' ); ?></h1>
                                         </div>

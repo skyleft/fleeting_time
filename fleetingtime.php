@@ -18,6 +18,7 @@ License: GPL2
     add_action('wp_ajax_doCreate', 'doCreate');
     add_action('wp_ajax_doLoadData', 'doLoadData');
     add_action('wp_ajax_doRemove','doRemove');
+    add_action('wp_ajax_doGet', 'doGet');
 
     function fleetingtime_install() {
         fleetingtime_create_table();
@@ -36,6 +37,19 @@ License: GPL2
                 "
         );
         echo json_encode($ft);
+        wp_die();
+    }
+    function doGet(){
+        global $wpdb;
+        $table_name = $wpdb->prefix . "fleetingtime";
+        $id = $_POST['id'];
+        $res = $wpdb->get_row(
+                "
+                    SELECT ID,TITLE,POSITION,STARTTIME,ENDTIME,FLAG_CONTENT 
+                    FROM $table_name WHERE ID = $id
+                "
+            );
+        echo json_encode($res);
         wp_die();
     }
     function doCreate(){

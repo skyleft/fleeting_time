@@ -3,7 +3,33 @@ $(function(){
     loadData();
 
     $("#addbtn").click(function () {
+        $("#fleetingform")[0].reset();
+        $("textarea[name='flag_content']").text('');
         $("#codedialog").modal('show');
+    });
+
+    $("#editbtn").click(function(event) {
+        var ids = $("input[name='ids']:checked");
+        if(ids && ids.length==1){
+            var sid = ids[0].value;
+            $.post(AJAXURL, {id: sid,action:'doGet'}, function(data, textStatus, xhr) {
+                if (data) {
+                    $("input[name='id']").val(data.ID);
+                    $("input[name='title']").val(data.TITLE);
+                    if(data.POSITION=="up")
+                        $("#upposition").prop('selected', true);
+                    if (data.POSITION=='bottom')
+                        $("#bottomposition").prop('selected', true);
+                    $("input[name='starttime']").val(data.STARTTIME.split(/\s+/)[0]);
+                    $("input[name='endtime']").val(data.ENDTIME.split(/\s+/)[0]);
+                    $("textarea[name='flag_content']").text(data.FLAG_CONTENT);
+                    $("#codedialog").modal('show');
+                };
+            },'json');
+
+        }else{
+            bootbox.alert(ALERT_PLEASE_CHOOSE_ONE_ROW);
+        }
     });
 
     $("#deletebtn").click(function () {
@@ -16,15 +42,15 @@ $(function(){
             if(sids){
                 $.post(AJAXURL, {id: sids,action:'doRemove'}, function(data) {
                     if (data && data.success) {
-                        bootbox.alert('ok');
+                        bootbox.alert(ALERT_OK);
                     }else{
-                        bootbox.alert('failed.');
+                        bootbox.alert(ALERT_FAILED);
                     }
                     loadData();
                 },'json');
             }
         }else{
-            bootbox.alert('Please choose at least one row.');
+            bootbox.alert(ALERT_PLEASE_CHOOSE_ONE_ROW);
         }
         
     });
@@ -40,7 +66,7 @@ $(function(){
                     $("#codedialog").modal('hide');
                     loadData();
                 }else{
-                    bootbox.alert("failed.");
+                    bootbox.alert(ALERT_FAILED);
                 }
             },'json');
         }

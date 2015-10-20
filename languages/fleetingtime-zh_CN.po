@@ -94,3 +94,12 @@ msgstr "预览"
 
 msgid "Your Post"
 msgstr "你的文章"
+
+msgid "ok"
+msgstr "操作成功"
+
+msgid "failed"
+msgstr "操作失败"
+
+msgid "please choose one row"
+msgstr "请选择一行"
