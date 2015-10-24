@@ -103,3 +103,21 @@ msgstr "操作失败"
 
 msgid "please choose one row"
 msgstr "请选择一行"
+
+msgid "content should not be empty!"
+msgstr "描述不能为空!"
+
+msgid "title should not be empty!"
+msgstr "时间段描述不能为空!"
+
+msgid "position should not be empty!"
+msgstr "位置不能为空!"
+
+msgid "starttime should not be empty!"
+msgstr "开始时间不能为空!"
+
+msgid "endtime should not be empty!"
+msgstr "结束时间不能为空!"
+
+msgid "the time period is already existed!"
+msgstr "存在重复的时间段"

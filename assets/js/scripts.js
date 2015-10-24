@@ -57,18 +57,27 @@ $(function(){
     
     $("#savebtn").click(function () {
         if(formcheck()){
-            var params = $("#fleetingform").serialize();
-            params += '&action=doCreate';
-            $.post(AJAXURL,params,function(data){
-                if(data && data.success){
-                    bootbox.alert("ok");
-                    $("#fleetingform")[0].reset();
-                    $("#codedialog").modal('hide');
-                    loadData();
+                var starttime = $("#starttime").val();
+                var endtime = $("#endtime").val();
+            $.post(AJAXURL, {starttime: starttime,endtime:endtime,action:'doCheckExisted'}, function(data, textStatus, xhr) {
+                if (!data.existed) {
+                    var params = $("#fleetingform").serialize();
+                    params += '&action=doCreate';
+                    $.post(AJAXURL,params,function(data){
+                        if(data && data.success){
+                            bootbox.alert("ok");
+                            $("#fleetingform")[0].reset();
+                            $("#codedialog").modal('hide');
+                            loadData();
+                        }else{
+                            bootbox.alert(ALERT_FAILED);
+                        }
+                    },'json');
                 }else{
-                    bootbox.alert(ALERT_FAILED);
+                    bootbox.alert(TIME_ALREADY_EXISTED);
                 }
             },'json');
+            
         }
     });
 
@@ -80,6 +89,37 @@ $(function(){
 });
 
 function formcheck(){
+
+    var title = $("#title").val();
+    var position = $("#title").val();
+    var starttime = $("#starttime").val();
+    var endtime = $("#endtime").val();
+    var flag_content = $("#flag_content").val();
+    if (title==null||title=="") {
+        bootbox.alert(TITLE_SHOULD_NOT_BE_EMPTY);
+        $("#title").focus();
+        return false;
+    }
+    if (position==null||position=="") {
+        bootbox.alert(POSITION_SHOULD_NOT_BE_EMPTY);
+        $("#position").focus();
+        return false;
+    }
+    if (starttime==null||starttime=="") {
+        bootbox.alert(STARTTIME_SHOULD_NOT_BE_EMPTY);
+        $("#starttime").focus();
+        return false;
+    }
+    if (endtime==null||endtime=="") {
+        bootbox.alert(ENDTIME_SHOULD_NOT_BE_EMPTY);
+        $("#endtime").focus();
+        return false;
+    }
+    if (flag_content==null||flag_content=="") {
+        bootbox.alert(CONTENT_SHOULD_NOT_BE_EMPTY);
+        $("#flag_content").focus();
+        return false;
+    }
 
     return true;
 }

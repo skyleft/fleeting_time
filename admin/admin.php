@@ -31,6 +31,14 @@ function display_admin_page()
             ALERT_OK = "<?php _e('ok','fleetingtime');?>";
             ALERT_PLEASE_CHOOSE_ONE_ROW = "<?php _e('please choose one row','fleetingtime');?>";
             ALERT_FAILED = "<?php _e('failed','fleetingtime');?>";
+
+            TITLE_SHOULD_NOT_BE_EMPTY = "<?php _e('title should not be empty!','fleetingtime');?>";
+            POSITION_SHOULD_NOT_BE_EMPTY = "<?php _e('position should not be empty!','fleetingtime');?>";
+            STARTTIME_SHOULD_NOT_BE_EMPTY = "<?php _e('starttime should not be empty!','fleetingtime');?>";
+            ENDTIME_SHOULD_NOT_BE_EMPTY = "<?php _e('endtime should not be empty!','fleetingtime');?>";
+            CONTENT_SHOULD_NOT_BE_EMPTY = "<?php _e('content should not be empty!','fleetingtime');?>";
+
+            TIME_ALREADY_EXISTED = "<?php _e('the time period is already existed!','fleetingtime');?>";
         </script>
     </head>
     <body>
@@ -98,9 +106,27 @@ function display_admin_page()
                             </table>
                         </div>
                         <div class="tab-pane" id="panel-281564">
-                            <p>
-
+                            <div class="view" style="margin-top:20px;margin-left:10px;margin-right:10px;">
+                            <p style="line-height:27px;margin-bottom:20px;">
+                                以前自己用wordpress写个人博客，一直坚持写了好几年，大概从大一一直到毕业之后。
                             </p>
+                            <p style="line-height:27px;margin-bottom:20px;">
+                                每次翻阅前段时间的博客的时候，总感觉那时的自己好幼稚，对那时的文字总有说不清的感觉，
+                                想删掉，但又不舍，毕竟也是那时真实的写照。
+                                就如现在有句话说的，现在想想以前的自己，真觉得是个傻逼。
+                            </p>
+                            <p style="line-height:27px;margin-bottom:20px;">
+
+                                所以呢，我就写了这个小插件，可以为不同时段的文章，添加一下小的标记，表明自己当时的情况，为读者提供更好的参考。
+                                有的时候写一些技术文章或者软件使用教程，可能时间过久技术早已变更，也可以标记一下。
+                            </p>
+                            <p style="line-height:27px;margin-bottom:20px;">
+                                由于是第一次写wordpress的插件，即便是有很长的使用经验，但是仍然不是很熟悉wordpress的插件API，对插件的需求
+                                把握也不足，最终也不知道做出的这东西有多少实际意义，勉勉强强就发布吧，如果您有任何意见，或者有需要的wordpress插件
+                                开发需要，都可以Email给我  @im@andy-cheung.me , 谢谢！
+                            </p>
+                            </div>
+                            
                         </div>
                         <div class="modal fade" id="codedialog" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" style="width:600px;">
