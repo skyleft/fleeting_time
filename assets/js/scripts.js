@@ -57,10 +57,11 @@ $(function(){
     
     $("#savebtn").click(function () {
         if(formcheck()){
+                var id = $("#id").val();
                 var starttime = $("#starttime").val();
                 var endtime = $("#endtime").val();
             $.post(AJAXURL, {starttime: starttime,endtime:endtime,action:'doCheckExisted'}, function(data, textStatus, xhr) {
-                if (!data.existed) {
+                if (id||(!data.existed)) {
                     var params = $("#fleetingform").serialize();
                     params += '&action=doCreate';
                     $.post(AJAXURL,params,function(data){

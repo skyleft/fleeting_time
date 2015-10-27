@@ -17,11 +17,7 @@ function display_admin_page()
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title><? _e('welcome to use fleeting time plugin', 'fleetingtime'); ?></title>
-
-        <link href="<?= plugins_url('assets/css/bootstrap.min.css',dirname(__FILE__))?>" rel="stylesheet">
-        <link href="<?= plugins_url('assets/css/style.css',dirname(__FILE__))?>" rel="stylesheet">
-        <link href="<?= plugins_url('assets/css/fleeting.css',dirname(__FILE__))?>" rel="stylesheet">
-
+        
         <script type="text/javascript">
             AJAXURL = "<?= admin_url( 'admin-ajax.php' )?>";
             VIEWLABEL = "<?php _e('Preview the flag content','fleetingtime') ?>";
@@ -234,11 +230,6 @@ function display_admin_page()
         </div>
     </div>
 
-
-    <script src="<?= plugins_url('assets/js/jquery.min.js',dirname(__FILE__))?>"></script>
-    <script src="<?= plugins_url('assets/js/bootstrap.min.js',dirname(__FILE__))?>"></script>
-    <script src="<?= plugins_url('assets/js/bootbox.min.js',dirname(__FILE__) );?>"></script>
-    <script src="<?= plugins_url('assets/js/scripts.js',dirname(__FILE__))?>"></script>
     <?php
 
 }

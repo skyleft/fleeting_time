@@ -20,12 +20,31 @@ License: GPL2
     add_action('wp_ajax_doRemove','doRemove');
     add_action('wp_ajax_doGet', 'doGet');
     add_action('wp_ajax_doCheckExisted','doCheckExisted');
+    add_action('admin_enqueue_scripts', 'load_custom_wp_style');
+    add_action( 'wp_enqueue_scripts', 'load_custom_front_style' );
 
     function fleetingtime_install() {
         fleetingtime_create_table();
     }
     function fleetingtime_remove() {
         //do some clear when the fleetingtime plugin were removed
+    }
+
+    function load_custom_wp_style($hook){
+        if ('settings_page_fleetingtime'===$hook) {
+            wp_enqueue_style( 'my_custom_style_bootstrap', plugin_dir_url( __FILE__ ) . 'assets/css/bootstrap.min.css' );
+            wp_enqueue_style( 'my_custom_style_style', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
+            wp_enqueue_style( 'my_custom_style_fleeting', plugin_dir_url( __FILE__ ) . 'assets/css/fleeting.css' );
+            wp_enqueue_script( 'my_custom_script_jquery', plugin_dir_url( __FILE__ ) . 'assets/js/jquery.min.js' );
+            wp_enqueue_script( 'my_custom_script_bootstrap', plugin_dir_url( __FILE__ ) . 'assets/js/bootstrap.min.js' );
+            wp_enqueue_script( 'my_custom_script_bootbox', plugin_dir_url( __FILE__ ) . 'assets/js/bootbox.min.js' );
+            wp_enqueue_script( 'my_custom_script_scripts', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js' );
+        }
+        
+    }
+
+    function load_custom_front_style() {
+        wp_enqueue_style( 'my_custom_style_fleeting', plugin_dir_url( __FILE__ ).'assets/css/fleeting.css' );
     }
 
     function doLoadData(){
@@ -208,11 +227,4 @@ License: GPL2
     }
 
     add_filter('the_content', 'fleeting_content');
-
-    add_action('wp_head','fleeting_style');
-
-    function fleeting_style(){
-        $fleeting_style = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".plugins_url('assets/css/fleeting.css',__FILE__)."\">";
-        echo $fleeting_style;
-    }
 ?>
